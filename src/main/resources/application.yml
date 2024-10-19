@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: products
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eagledev
+    username: postgres
+    password: ambulance
+  jpa:
+    hibernate:
+      ddl-auto: update
