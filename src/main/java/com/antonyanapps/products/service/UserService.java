@@ -46,7 +46,7 @@ public class UserService {
         return userRepository.findById(id)
                 .<ResponseEntity<?>>map(user -> ResponseEntity.ok().body(user))
                 .orElseGet(() -> createErrorResponse(
-                        "User by id " + id + " not found in database",
+                        "User with id " + id + " not found in database",
                         HttpStatus.NOT_FOUND
                 ));
     }
