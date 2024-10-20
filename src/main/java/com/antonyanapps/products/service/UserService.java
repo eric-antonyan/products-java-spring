@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,15 @@ public class UserService {
 
         User newUser = userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    }
+
+    public ResponseEntity<?> getUserById(Long id) {
+        return userRepository.findById(id)
+                .<ResponseEntity<?>>map(user -> ResponseEntity.ok().body(user))
+                .orElseGet(() -> createErrorResponse(
+                        "User by id " + id + " not found in database",
+                        HttpStatus.NOT_FOUND
+                ));
     }
 
     private ResponseEntity<CustomErrorResponse> createErrorResponse(String message, HttpStatus status) {

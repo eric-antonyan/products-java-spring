@@ -1,5 +1,6 @@
 package com.antonyanapps.products.controller;
 
+import com.antonyanapps.products.CustomErrorResponse;
 import com.antonyanapps.products.model.User;
 import com.antonyanapps.products.service.UserService;
 import jakarta.validation.Valid;
@@ -38,5 +39,26 @@ public class UserController {
                     );
         }
         return userService.create(user);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> findUserById(@Valid @PathVariable String id) {
+        Long parsedId;
+
+        try {
+            parsedId = Long.parseLong(id);
+        } catch (NumberFormatException ex) {
+            return createErrorResponse(
+                    "Invalid ID Format. ID must be number",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+
+        return this.userService.getUserById(parsedId);
+    }
+
+    private ResponseEntity<CustomErrorResponse> createErrorResponse(String message, HttpStatus status) {
+        CustomErrorResponse customErrorResponse = new CustomErrorResponse(message, status);
+        return ResponseEntity.status(status).body(customErrorResponse);
     }
 }
