@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.swing.text.html.parser.Entity;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +50,12 @@ public class UserService {
                         "User with id " + id + " not found in database",
                         HttpStatus.NOT_FOUND
                 ));
+    }
+
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity
+                .ok()
+                .body(userRepository.findAll());
     }
 
     private ResponseEntity<CustomErrorResponse> createErrorResponse(String message, HttpStatus status) {

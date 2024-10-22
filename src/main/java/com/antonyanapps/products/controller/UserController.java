@@ -12,6 +12,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,8 +23,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public String getAllUsers() {
-        return "string";
+    public ResponseEntity<List<User>> getAllUsers() {
+        return this.userService.getAllUsers();
     }
 
     @PostMapping

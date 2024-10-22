@@ -2,7 +2,7 @@ spring:
   application:
     name: products
   datasource:
-    url: jdbc:postgresql://localhost:5432/eagledev
+    url: jdbc:postgresql://postgres:5432/eagledev
     username: postgres
     password: ambulance
     type: org.apache.tomcat.jdbc.pool.DataSource

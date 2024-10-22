@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-@Data
 public class CustomErrorResponse {
     private String message;
     private String error;
@@ -15,5 +14,29 @@ public class CustomErrorResponse {
         this.message = message;
         this.status = status.value();
         this.error = status.getReasonPhrase();
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
